@@ -10,7 +10,7 @@ export type DialogsType = {
     avatar: string
 }
 
-let initialState: InitialStateType = {
+let initialState = {
     dialogs: [
         {id: 1, name: 'Vlad', avatar: 'https://biogr.net/wp-content/uploads/2021/10/fdsfsdsdf.jpg'},
         {
@@ -45,11 +45,10 @@ export const messagesReducer = (state: InitialStateType = initialState, action: 
 
     switch (action.type) {
         case 'SEND-MESSAGE':
-            let body = state.newMessageText
             return {
                 ...state,
-                newMessageText: '',
-                messages: [...state.messages, {id: 5, message: body}]
+                messages: [...state.messages, {id: 5, message: state.newMessageText}],
+                newMessageText: ''
             }
 
         case 'UPDATE-NEW-MESSAGE-TEXT':
@@ -68,11 +67,8 @@ export const updateNewMessageTextActionCreator = (newMessageText: string) => {
         newMessageText: newMessageText
     } as const
 }
-export const sendMessageActionCreator = (
-    // body: string
-) => {
+export const sendMessageActionCreator = () => {
     return {
         type: 'SEND-MESSAGE',
-        // body: body
     } as const
 }

@@ -1,5 +1,5 @@
 import {profileReducer, addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
-import {messagesReducer, updateNewMessageTextActionCreator} from "./message-reducer";
+import {messagesReducer, sendMessageActionCreator, updateNewMessageTextActionCreator} from "./message-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 
 type MessagesType = {
@@ -35,7 +35,7 @@ export type ActionsTypes =
     ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof updateNewMessageTextActionCreator>
-// | ReturnType<typeof sendMessageCreator>
+    | ReturnType<typeof sendMessageActionCreator>
 
 export type StoreType = {
     _state: RootStateType

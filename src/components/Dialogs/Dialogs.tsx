@@ -7,17 +7,12 @@ import {DialogsPageType} from "../../redux/store";
 
 type DialogsType = {
     updateNewMessageText: (newMessage: string) => void
-    messagePage: DialogsPageType
+    messagesPage: DialogsPageType
     sendMessage: () => void
 }
 
 export const Dialogs: React.FC<DialogsType> = (props) => {
-
-    let dialogsElements = props.messagePage.dialogs.map(d =>
-        <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>)
-    let messagesElements = props.messagePage.messages.map(m =>
-        <Message message={m.message}/>)
-    let newMessageText = props.messagePage.newMessageText
+    let newMessageText = props.messagesPage.newMessageText
 
     const onSendMessageClick = () => {
         props.sendMessage()
@@ -30,10 +25,12 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {dialogsElements}
+                {props.messagesPage.dialogs && props.messagesPage.dialogs.map(d =>
+                    <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>)}
             </div>
             <div className={s.messages}>
-                {messagesElements}
+                {props.messagesPage.messages && props.messagesPage.messages.map(m =>
+                    <Message message={m.message}/>)}
             </div>
             <div>
                 <div>

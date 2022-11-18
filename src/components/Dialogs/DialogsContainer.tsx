@@ -3,13 +3,13 @@ import {
     sendMessageActionCreator,
     updateNewMessageTextActionCreator
 } from '../../redux/message-reducer';
-import {RootStateType} from "../../redux/store";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
 
-const mapStateToProps = (state: RootStateType) => {
+const mapStateToProps = (state: AppStateType) => {
     return {
-        messagesPage: state.dialogsPage
+        messagesPage: state.messagesPage
     }
 }
 

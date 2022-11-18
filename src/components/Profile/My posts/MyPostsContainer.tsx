@@ -37,7 +37,7 @@ const mapStateToProps = (state: AppStateType) => {
 const mapDispatchToProps = (dispatch: any) => {
     return {
         addPost: () => {
-            dispatch(addPostActionCreator(getState().profilePage.messageForNewPost))
+            dispatch(addPostActionCreator())
         },
         updateNewPostText: (text: string) => {
             dispatch(updateNewPostTextActionCreator(text))
@@ -45,4 +45,4 @@ const mapDispatchToProps = (dispatch: any) => {
     }
 }
 
-const SuperDialogsCont = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)

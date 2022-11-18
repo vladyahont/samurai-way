@@ -5,16 +5,18 @@ import axios from "axios";
 import userPhoto from './../../assets/img/470-4703547_icon-user-icon-hd-png-download.png'
 
 export const Users = (props: UsersPropsType) => {
+    let getUsers = () => {
+        if (props.usersPage.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                props.setUsers(response.data.items)
+            })
 
-    if (props.usersPage.users.length === 0) {
-
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            props.setUsers(response.data.items)
-        })
-
+        }
     }
 
+
     return <div>
+        <button onClick={getUsers}>Get users</button>
         {
             props.usersPage.users.map(u => <div key={u.id}>
                 <span>
