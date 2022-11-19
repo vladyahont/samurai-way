@@ -5,12 +5,10 @@ import axios from "axios";
 
 export class UsersC extends React.Component {
 
-    constructor(props: ) {
-        super(props: )
-
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-                this.props.setUsers(response.data.items)
-            })
+    componentDidMount() {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            this.props.setUsers(response.data.items)
+        })
     }
 
     render() {
