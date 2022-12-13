@@ -1,28 +1,37 @@
-import React from 'react'
-import s from './users.module.css'
+import React from 'react';
+import s from "./users.module.css";
+import userPhoto from "../../assets/img/470-4703547_icon-user-icon-hd-png-download.png";
 import {UsersPropsType} from "./UsersContainer";
-import axios from "axios";
-import userPhoto from './../../assets/img/470-4703547_icon-user-icon-hd-png-download.png'
 
-export const Users = (props: UsersPropsType) => {
-    let getUsers = () => {
-        if (props.usersPage.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-                props.setUsers(response.data.items)
-            })
+export const Users = (props: UsersPropsType & { onPageChanged: any }) => {
 
-        }
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+
+    let pages: number[] = []
+    console.log(props.totalUsersCount)
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
     }
 
-
-    return <div>
-        <button onClick={getUsers}>Get users</button>
-        {
-            props.usersPage.map(u => <div key={u.id}>
+    return (
+        <div>
+            <div>
+                {
+                    pages.map((p, index) => <span key={index}
+                                                  className={props.currentPage === p ? s.selectedPage : ''}
+                                                  onClick={() => {
+                                                      props.onPageChanged(pagesCount)
+                                                  }}
+                    >
+                        {p}
+                    </span>)}
+            </div>
+            {
+                props.usersPage.map(u => <div key={u.id}>
                 <span>
                     <div>
-                        <img className={s.userPhoto} src={u.photos.small != null ? u.photos.small
-                            : userPhoto}/>
+                        <img alt={''} className={s.userPhoto} src={u.photos.small !== null
+                            ? u.photos.small : userPhoto}/>
                     </div>
                     <div>
                         {u.followed
@@ -34,17 +43,19 @@ export const Users = (props: UsersPropsType) => {
                             }}>Follow</button>}
                     </div>
                 </span>
-                <span>
                     <span>
-                        <div>{u.fullName}</div>
+                    <span>
+                        <div>{'u.fullName'}</div>
                         <div>{u.status}</div>
                     </span>
                     <span>
-                        <div>{u.location.country}</div>
-                        <div>{u.location.city}</div>
+                        <div>{'u.location.country'}</div>
+                        <div>{'u.location.city'}</div>
                     </span>
                 </span>
-            </div>)
-        }
-    </div>
-}
+                </div>)
+            }
+        </div>
+    );
+};
+
