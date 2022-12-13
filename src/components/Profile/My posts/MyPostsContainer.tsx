@@ -2,7 +2,6 @@ import React from 'react';
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
-import {RootStateType} from "../../../redux/store";
 import {AppStateType} from "../../../redux/redux-store";
 
 // export const MyPostsContainer: React.FC = () => {

@@ -39,8 +39,7 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
                               placeholder={"Write anything you think"}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post
-                    </button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>

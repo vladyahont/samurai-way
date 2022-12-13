@@ -1,8 +1,26 @@
 import React from 'react'
 import s from "./users.module.css";
 import axios from "axios";
+import {UserType} from "../../redux/users-reducer";
+import userPhoto from '../../assets/img/470-4703547_icon-user-icon-hd-png-download.png'
+import {UsersPropsType} from "./UsersContainer";
 
-export class UsersC extends React.Component {
+
+type UsersCProps = {
+    setUsers: (users: Array<UserType>) => void
+    setCurrentPage: (currentPage: number) => void
+    setTotalUsersCount: (totalUsersCount: number) => void
+    currentPage: number
+    pageSize: number
+    totalUsersCount: number
+    usersPage: Array<UserType>
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+
+};
+
+
+export class UsersAPIComp extends React.Component <UsersPropsType> {
 
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users${this.props.currentPage}&count=${this.props.pageSize}`)
@@ -11,17 +29,17 @@ export class UsersC extends React.Component {
                 this.props.setTotalUsersCount(response.data.totalUsersCount)
             })
     }
-    onPageChanged = (currentPage) => {
+
+    onPageChanged = (currentPage: number) => {
         this.props.setCurrentPage(currentPage)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users${currentPage}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.setUsers(response.data.items)
             })
     }
-}
+
 
     render() {
-
         let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
 
         let pages = []
@@ -31,11 +49,18 @@ export class UsersC extends React.Component {
 
         return <div>
             <div>
-                {pages.map(p => <span className={this.props.currentPage === p ? s.selectedPage : ''}
-                onClick={ () => {this.onPageChanged(currentPage)}>{p}</span>)}
+                {
+                    pages.map(p => <span
+                        className={this.props.currentPage === p ? s.selectedPage : ''}
+                        onClick={() => {
+                            this.onPageChanged(pagesCount)
+                        }}
+                    >
+                        {p}
+                    </span>)}
             </div>
             {
-                this.props.usersPage.users.map(u => <div key={u.id}>
+                this.props.usersPage.map(u => <div key={u.id}>
                 <span>
                     <div>
                         <img className={s.userPhoto} src={u.photos.small != null

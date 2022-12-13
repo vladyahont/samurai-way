@@ -47,6 +47,11 @@ export const messagesReducer = (state: InitialStateType = initialState, action: 
         case 'SEND-MESSAGE':
             return {
                 ...state,
+                dialogs: [...state.dialogs, {
+                    id: 5,
+                    name: 'Vlad',
+                    avatar: 'https://biogr.net/wp-content/uploads/2021/10/fdsfsdsdf.jpg'
+                }],
                 messages: [...state.messages, {id: 5, message: state.newMessageText}],
                 newMessageText: ''
             }

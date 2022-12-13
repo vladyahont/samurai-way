@@ -19,7 +19,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             }
             return {
                 ...state,
-                posts: [...state.posts, newPost],
+                posts: [newPost, ...state.posts],
                 messageForNewPost: ''
             }
         }
