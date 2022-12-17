@@ -25,12 +25,12 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {props.messagesPage.dialogs && props.messagesPage.dialogs.map(d =>
-                    <DialogItem name={d.name} id={d.id} avatar={d.avatar}/>)}
+                {props.messagesPage.dialogs && props.messagesPage.dialogs.map((d, index) =>
+                    <DialogItem key={index} name={d.name} id={d.id} avatar={d.avatar}/>)}
             </div>
             <div className={s.messages}>
-                {props.messagesPage.messages && props.messagesPage.messages.map(m =>
-                    <Message message={m.message}/>)}
+                {props.messagesPage.messages && props.messagesPage.messages.map((m, index) =>
+                    <Message key={index} message={m.message}/>)}
             </div>
             <div>
                 <div>
