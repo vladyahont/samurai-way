@@ -5,10 +5,12 @@
 
 .selectedPage {
     font-weight: bold;
+    /*display: flex;*/
+    /*justify-content: flex-start;*/
 }
 
 .loadingGif {
     width: 30px;
     height: 30px;
-    
+
 }

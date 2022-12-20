@@ -13,8 +13,8 @@ type MyPostsType = {
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {
 
-    let postsElement = props.profilePage.posts.map((p: any) => <Post message={p.message}
-                                                                     likeCount={p.likeCount}/>)
+    let postsElement = props.profilePage.posts.map((p, index) => <Post key={index} message={p.message}
+                                                                       likeCount={p.likeCount}/>)
 
 
     const addPost = () => {

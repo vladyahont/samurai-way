@@ -2,13 +2,14 @@ import React from 'react';
 import s from "./users.module.css";
 import userPhoto from "../../assets/img/470-4703547_icon-user-icon-hd-png-download.png";
 import {UsersPropsType} from "./UsersContainer";
+import {NavLink} from "react-router-dom";
 
 export const Users = (props: UsersPropsType & { onPageChanged: any }) => {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    console.log(pagesCount)
+    let pages = []
 
-    let pages: number[] = []
-    console.log(props.totalUsersCount)
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
@@ -20,18 +21,18 @@ export const Users = (props: UsersPropsType & { onPageChanged: any }) => {
                     pages.map((p, index) => <span key={index}
                                                   className={props.currentPage === p ? s.selectedPage : ''}
                                                   onClick={() => {
-                                                      props.onPageChanged(pagesCount)
-                                                  }}
-                    >
-                        {p}
-                    </span>)}
+                                                      props.onPageChanged(p)
+                                                  }}>{p}</span>)
+                }
             </div>
             {
                 props.usersPage.map(u => <div key={u.id}>
                 <span>
                     <div>
-                        <img alt={''} className={s.userPhoto} src={u.photos.small !== null
-                            ? u.photos.small : userPhoto}/>
+                        <NavLink to={'/profile/' + u.id}>
+                            <img alt={''} className={s.userPhoto}
+                                 src={u.photos.small != null ? u.photos.small : userPhoto}/>
+                        </NavLink>
                     </div>
                     <div>
                         {u.followed
@@ -45,12 +46,13 @@ export const Users = (props: UsersPropsType & { onPageChanged: any }) => {
                 </span>
                     <span>
                     <span>
-                        <div>{'u.fullName'}</div>
+                        <div>{u.id}</div>
+                        <div>{u.name}</div>
                         <div>{u.status}</div>
                     </span>
                     <span>
-                        <div>{'u.location.country'}</div>
-                        <div>{'u.location.city'}</div>
+                        <div>{u.uniqueUrlName}</div>
+                        <div>{u.followed}</div>
                     </span>
                 </span>
                 </div>)

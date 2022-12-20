@@ -1,4 +1,3 @@
-import {profileReducer, addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
 import {messagesReducer, sendMessageActionCreator, updateNewMessageTextActionCreator} from "./message-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 
@@ -32,8 +31,6 @@ export type RootStateType = {
     sidebar: SidebarType
 }
 export type ActionsTypes =
-    ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof updateNewMessageTextActionCreator>
     | ReturnType<typeof sendMessageActionCreator>
 
@@ -81,7 +78,7 @@ export let store: StoreType = {
     },
     dispatch(action) {
 
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        //this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = messagesReducer(this._state.dialogsPage, action)
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 

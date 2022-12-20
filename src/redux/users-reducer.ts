@@ -1,10 +1,13 @@
 export type UserType = {
+    name: string
     id: number
-    photos: { small: string }
+    uniqueUrlName: string | null
+    photos: {
+        small: string | null,
+        large: string | null
+    }
+    status: string | null
     followed: boolean
-    fullName: string
-    status: string
-    location: { country: string, city: string }
 }
 
 const initialState: InitialStateType = {
@@ -49,12 +52,13 @@ type toggleIsFetchingACType = {
 }
 
 
-type ActionsTypes = followACType | unFollowACType | setUsersACType | setCurrentPageACType | totalUsersCountACType
-    | toggleIsFetchingACType
+type ActionsTypes = followACType | unFollowACType | setUsersACType
+    | setCurrentPageACType | totalUsersCountACType | toggleIsFetchingACType
 
 export const usersReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case "FOLLOW": {
+            console.log(action)
             return {
                 ...state,
                 users: state.users.map(u => {
@@ -83,6 +87,7 @@ export const usersReducer = (state = initialState, action: ActionsTypes): Initia
             return {...state, currentPage: action.currentPage}
         }
         case 'SET-TOTAL-USERS-COUNT': {
+
             return {...state, totalUsersCount: action.totalUsersCount}
         }
         case "TOGGLE-IS-FETCHING": {
@@ -104,7 +109,7 @@ export const unFollow = (userId: number) => {
     return {
         type: 'UNFOLLOW',
         userId
-    } as const
+    }
 }
 export const setUsers = (users: Array<UserType>) => {
     return {
@@ -129,5 +134,4 @@ export const toggleIsFetching = (isFetching: boolean) => {
         type: 'TOGGLE-IS-FETCHING',
         isFetching
     }
-
 }

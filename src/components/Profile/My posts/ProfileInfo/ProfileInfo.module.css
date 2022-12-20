@@ -4,5 +4,11 @@ img {
 }
 
 .descriptionBlock {
-    padding: 10px;
+
+}
+
+.profileClass {
+    padding: 0 0 70px 10px;
+    width: 200px;
+    height: 100px;
 }
