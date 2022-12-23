@@ -5,10 +5,10 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {InitialStateType, setAuthUserData} from "../../redux/auth-reducer";
 
-type AuthPropsType = {
-    mapStateToProps: any
+export type AuthPropsType = {
     setAuthUserData: (data: InitialStateType) => void
-
+    isAuth: boolean,
+    login: string
 }
 
 class HeaderContainer extends React.Component <AuthPropsType> {

@@ -58,7 +58,6 @@ type ActionsTypes = followACType | unFollowACType | setUsersACType
 export const usersReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case "FOLLOW": {
-            console.log(action)
             return {
                 ...state,
                 users: state.users.map(u => {
@@ -105,7 +104,7 @@ export const follow = (userId: number) => {
         userId
     } as const
 }
-export const unFollow = (userId: number) => {
+export const unfollow = (userId: number) => {
     return {
         type: 'UNFOLLOW',
         userId
