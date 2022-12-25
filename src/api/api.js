@@ -28,7 +28,7 @@ export const getAuth = () => {
 }
 
 export const getFollow = (id) => {
-    return instance.delete(`follow/${id}`, {})
+    return instance.post(`follow/${id}`, {})
         .then(response => response.data)
 }
 

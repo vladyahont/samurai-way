@@ -37,18 +37,22 @@ export const Users = (props: UsersPropsType & { onPageChanged: any }) => {
                     </div>
                     <div>
                         {u.followed
-                            ? <button onClick={() => {
-                                getUnFollow(u.id).then(response => {
-                                    if (response.data.resultCode === 0) {
+                            ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                props.toggleFollowingInProgress(true, u.id)
+                                getUnFollow(u.id).then(data => {
+                                    if (data.resultCode === 0) {
                                         props.unfollow(u.id)
                                     }
+                                    props.toggleFollowingInProgress(false, u.id)
                                 })
                             }}>UnFollow</button>
-                            : <button onClick={() => {
-                                getFollow(u.id).then(response => {
-                                    if (response.data.resultCode === 0) {
+                            : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                props.toggleFollowingInProgress(true, u.id)
+                                getFollow(u.id).then(data => {
+                                    if (data.resultCode === 0) {
                                         props.follow(u.id)
                                     }
+                                    props.toggleFollowingInProgress(false, u.id)
                                 })
                             }}>Follow</button>}
                     </div>
