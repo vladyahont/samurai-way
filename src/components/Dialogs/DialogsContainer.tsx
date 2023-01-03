@@ -9,7 +9,8 @@ import {AppStateType} from "../../redux/redux-store";
 
 const mapStateToProps = (state: AppStateType) => {
     return {
-        messagesPage: state.messagesPage
+        messagesPage: state.messagesPage,
+        isAuth: state.auth.isAuth
     }
 }
 
