@@ -1,7 +1,9 @@
+import {authAPI} from "../api/api";
+
 const initialState: InitialStateType = {
     id: 0,
     email: 'null',
-    login: 'null',
+    login: 'Vlad',
     isAuth: false
 }
 
@@ -37,4 +39,14 @@ export const setAuthUserData = (data: InitialStateType): setAuthUserDataType => 
         data
     } as const
 }
+export const getAuthUserData = () => {
+    return (dispatch: any) => {
+        authAPI.getAuthMe().then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setAuthUserData(data.data.login))
+            }
+        })
+    }
+}
+
 

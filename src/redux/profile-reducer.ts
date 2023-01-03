@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof setUserProfile>
 
@@ -103,4 +105,11 @@ export const setUserProfile = (profile: ProfileType) => {
         type: 'SET-USER-PROFILE',
         profile
     } as const
+}
+export const getUserProfile = (userId: string) => {
+    return (dispatch: any) => {
+        usersAPI.getProfile(userId).then(data => {
+            dispatch(setUserProfile(data))
+        })
+    }
 }
