@@ -17,7 +17,8 @@ let rootReducer = combineReducers({
 export type AppStateType = ReturnType<typeof rootReducer>
 
 export let store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleware))
-
+//@ts-ignore
+window.store = store
 
 
 

@@ -61,6 +61,6 @@ export const Users = (props: UsersPropsType & { onPageChanged: any }) => {
                 </div>)
             }
         </div>
-    );
-};
+    )
+}
 

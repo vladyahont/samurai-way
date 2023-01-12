@@ -8,10 +8,12 @@ import {
     unFollowSuccess,
     UserType
 } from "../../redux/users-reducer";
-import React from "react";
+import React, {ComponentType} from "react";
 import {Users} from "./Users";
 
 import PreLoader from "../preLoader/preLoader";
+import withAuthRedirect from "../HOK/withAuthRedirect";
+import {compose} from "redux";
 
 // const users = [
 //     {
@@ -99,7 +101,7 @@ class UsersContainer extends React.Component <UsersPropsType> {
                    getUsers={this.props.getUsers}
                    follow={this.props.follow}
                    unFollow={this.props.unFollow}
-            />;
+            />
         </>
 
     }
@@ -116,35 +118,17 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-// let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-//     return {
-//         follow: (userId: number) => {
-//             dispatch(followAC(userId))
-//         },
-//         unfollow: (userId: number) => {
-//             dispatch(unFollowAC(userId))
-//         },
-//         setUsers: (users: Array<UserType>) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage: (currentPage: number) => {
-//             dispatch(setCurrentPageAC(currentPage))
-//         },
-//         setTotalUsersCount: (totalUsersCount: number) => {
-//             dispatch(totalUsersCountAC(totalUsersCount))
-//         },
-//         toggleIsFetching: (isFetching: boolean) => {
-//             dispatch(toggleIsFetchingAC(isFetching))
-//         }
-//     }
-// }
+//const AuthRedirectComponent = withAuthRedirect()
 
-export const UserContainer = connect(mapStateToProps, {
-    followSuccess,
-    unFollowSuccess,
-    setCurrentPage,
-    toggleFollowingInProgress,
-    getUsers,
-    follow,
-    unFollow
-})(UsersContainer)
+export const UserContainer = compose<ComponentType>(
+    connect(mapStateToProps, {
+        followSuccess,
+        unFollowSuccess,
+        setCurrentPage,
+        toggleFollowingInProgress,
+        getUsers,
+        follow,
+        unFollow
+    }),
+    withAuthRedirect)
+(UsersContainer)

@@ -7,29 +7,6 @@ import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
 
-// export const MyPostsContainer: React.FC = () => {
-//
-//     return (
-//         <StoreContext.Consumer>
-//             {
-//                 (store) => {
-//
-//                     const addPost = () => {
-//                         store.dispatch(addPostActionCreator(store.getState().profilePage.messageForNewPost))
-//                     }
-//
-//                     const newPostChange = (text: string) => {
-//                         store.dispatch(updateNewPostTextActionCreator(text))
-//                     }
-//
-//                     return <MyPosts profilePage={store.getState().profilePage} addPost={addPost}
-//                                     updateNewPostText={newPostChange}/>
-//                 }
-//             }
-//         </StoreContext.Consumer>
-//     )
-// }
-
 const mapStateToProps = (state: AppStateType) => {
     return {
         profilePage: state.profilePage
