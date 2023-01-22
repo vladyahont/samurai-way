@@ -6,7 +6,7 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UserContainer} from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import LoginPage from "./components/LoginPage/LoginPage";
+import {LoginPage} from "./components/LoginPage/LoginPage";
 
 
 export const App: React.FC = () => {
