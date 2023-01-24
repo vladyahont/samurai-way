@@ -1,7 +1,7 @@
 import {profileAPI, usersAPI} from "../api/api";
 
-type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
-    | ReturnType<typeof setUserProfile> | ReturnType<typeof setStatus>
+type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setStatus>
 
 type PostType = {
     id: number
@@ -10,7 +10,6 @@ type PostType = {
 }
 
 type initialStateType = {
-    messageForNewPost: string
     posts: Array<PostType>
     profile: ProfileType
     status: string
@@ -35,7 +34,6 @@ export type ProfileType = {
 }
 
 let initialState: initialStateType = {
-    messageForNewPost: '',
     posts: [
         {id: 1, message: 'Hi! How are you?))', likeCount: 14},
         {id: 2, message: "Hello! It's my first post!", likeCount: 20}
@@ -67,19 +65,12 @@ export const profileReducer = (state = initialState, action: ActionsTypes): init
         case "ADD-POST": {
             let newPost: PostType = {
                 id: new Date().getTime(),
-                message: state.messageForNewPost,
+                message: action.newPostText,
                 likeCount: 0
             }
             return {
                 ...state,
-                posts: [newPost, ...state.posts],
-                messageForNewPost: ''
-            }
-        }
-        case "UPDATE-NEW-POST-TEXT": {
-            return {
-                ...state,
-                messageForNewPost: action.newText
+                posts: [newPost, ...state.posts]
             }
         }
         case "SET-USER-PROFILE": {
@@ -94,15 +85,10 @@ export const profileReducer = (state = initialState, action: ActionsTypes): init
 }
 
 
-export const addPostAC = () => {
+export const addPostAC = (newPostText: string) => {
     return {
         type: 'ADD-POST',
-    } as const
-}
-export const updateNewPostTextAC = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText
+        newPostText
     } as const
 }
 export const setUserProfile = (profile: ProfileType) => {

@@ -16,7 +16,7 @@ export const Navbar: React.FC = () => {
                 <NavLink to='/users' className={navData => navData.isActive ? s.active : s.item}>Users</NavLink>
             </div>
             <div>
-                <NavLink to='#'>News</NavLink>
+                <NavLink to='login'>News</NavLink>
             </div>
             <div>
                 <NavLink to='#'>Music</NavLink>

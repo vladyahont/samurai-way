@@ -1,47 +1,31 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post';
 import {ProfilePageType} from "../../../redux/store";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 
 type MyPostsType = {
     profilePage: ProfilePageType
-    addPost: () => void
-    updateNewPostText: (text: string) => void
+    addPost: (newPostText: string) => void
 }
 
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {
 
-    let postsElement = props.profilePage.posts.map((p, index) => <Post key={index} message={p.message}
-                                                                       likeCount={p.likeCount}/>)
+    let postsElement = props.profilePage.posts.map((p, index) =>
+        <Post key={index} message={p.message} likeCount={p.likeCount}/>)
 
 
-    const addPost = () => {
-        props.addPost()
-        // props.dispatch(addPostActionCreator(props.profilePage.messageForNewPost))
-    }
-
-    const newPostChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        let text = event.currentTarget.value
-        props.updateNewPostText(text)
-        // props.dispatch(updateNewPostTextActionCreator(event.currentTarget.value))
+    const addPost = (values: FormForPostDataType) => {
+        props.addPost(values.newPostText)
     }
 
 
     return (
         <div className={s.postsBlock}>
             <h4>My posts</h4>
-            <div>
-                <div>
-                    <textarea onChange={newPostChange}
-                              value={props.profilePage.messageForNewPost}
-                              placeholder={"Write anything you think"}/>
-                </div>
-                <div>
-                    <button onClick={addPost}>Add post</button>
-                </div>
-            </div>
+            <AddPostFormRedux onSubmit={addPost}/>
             <div className={s.posts}>
                 New posts
             </div>
@@ -51,3 +35,21 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
         </div>
     )
 }
+
+type FormForPostDataType = {
+    newPostText: string
+}
+export const AddPostForm: React.FC<InjectedFormProps<FormForPostDataType>> = (props) => {
+    return <form onSubmit={props.handleSubmit}>
+        <div>
+            <Field component={'textarea'}
+                   name={'newPostText'}
+                   placeholder={"Write anything you think"}>
+            </Field>
+        </div>
+        <div>
+            <button>Add post</button>
+        </div>
+    </form>
+}
+const AddPostFormRedux = reduxForm<FormForPostDataType>({form: 'postAddPostForm'})(AddPostForm)

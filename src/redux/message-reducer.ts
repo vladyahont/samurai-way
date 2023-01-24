@@ -34,8 +34,7 @@ let initialState = {
         {id: 2, message: "What's up????"},
         {id: 3, message: "Let's go! Fly!"},
         {id: 4, message: 'YOOGOOGOO'},
-    ] as Array<MessagesType>,
-    newMessageText: '',
+    ] as Array<MessagesType>
 }
 
 export type InitialStateType = typeof initialState
@@ -52,28 +51,16 @@ export const messagesReducer = (state: InitialStateType = initialState, action: 
                     name: 'Vlad',
                     avatar: 'https://biogr.net/wp-content/uploads/2021/10/fdsfsdsdf.jpg'
                 }],
-                messages: [...state.messages, {id: 5, message: state.newMessageText}],
-                newMessageText: ''
-            }
-
-        case 'UPDATE-NEW-MESSAGE-TEXT':
-            return {
-                ...state,
-                newMessageText: action.newMessageText
+                messages: [...state.messages, {id: 5, message: action.newMessageText}]
             }
         default:
             return state
     }
 }
 
-export const updateNewMessageTextActionCreator = (newMessageText: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newMessageText: newMessageText
-    } as const
-}
-export const sendMessageActionCreator = () => {
+export const sendMessageActionCreator = (newMessageText: string) => {
     return {
         type: 'SEND-MESSAGE',
+        newMessageText
     } as const
 }

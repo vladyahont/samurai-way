@@ -1,4 +1,4 @@
-import {messagesReducer, sendMessageActionCreator, updateNewMessageTextActionCreator} from "./message-reducer";
+import {sendMessageActionCreator} from "./message-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 
 type MessagesType = {
@@ -30,9 +30,7 @@ export type RootStateType = {
     dialogsPage: DialogsPageType
     sidebar: SidebarType
 }
-export type ActionsTypes =
-    | ReturnType<typeof updateNewMessageTextActionCreator>
-    | ReturnType<typeof sendMessageActionCreator>
+export type ActionsTypes = ReturnType<typeof sendMessageActionCreator>
 
 export type StoreType = {
     _state: RootStateType
@@ -79,7 +77,7 @@ export let store: StoreType = {
     dispatch(action) {
 
         //this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.dialogsPage = messagesReducer(this._state.dialogsPage, action)
+        //this._state.dialogsPage = messagesReducer(this._state.dialogsPage, action)
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
         this._callSubscriber()
