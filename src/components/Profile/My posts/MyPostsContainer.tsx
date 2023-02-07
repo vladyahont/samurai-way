@@ -5,6 +5,7 @@ import {
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
+import {compose} from "redux";
 
 const mapStateToProps = (state: AppStateType) => {
     return {
@@ -20,4 +21,4 @@ const mapDispatchToProps = (dispatch: any) => {
     }
 }
 
-export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+export const MyPostsContainer = compose<React.FC>(connect(mapStateToProps, mapDispatchToProps))(MyPosts)

@@ -1,8 +1,11 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {connect} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
+import {loginTC} from "../../redux/auth-reducer";
 
 type FormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
@@ -10,7 +13,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form>
             <div onSubmit={props.handleSubmit}>
-                <Field placeholder={'Login'} name={'login'} component={'input'}/>
+                <Field placeholder={'Email'} name={'Email'} component={'input'}/>
             </div>
             <div>
                 <Field placeholder={'Password'} name={'password'} component={'input'}/>
@@ -25,10 +28,21 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     );
 };
 
+
+type MapStatePropsType = {
+    isAuth: boolean
+    loginTC: (email: string, password: string, rememberMe: boolean) => void
+
+}
+
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
-export const LoginPage = () => {
+const LoginPage = (props: MapStatePropsType) => {
     const onSubmit = (formData: FormDataType) => {
         console.log(formData)
+        props.loginTC(formData.email, formData.password, formData.rememberMe)
+    }
+    if (props.isAuth) {
+
     }
     return (
         <div>
@@ -37,3 +51,9 @@ export const LoginPage = () => {
         </div>
     )
 }
+
+const mapStateToProps = (state: AppStateType) => ({
+    isAuth: state.auth.isAuth
+
+})
+export default connect(mapStateToProps, {loginTC})(LoginPage)

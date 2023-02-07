@@ -47,6 +47,14 @@ export const authAPI = {
     getAuthMe() {
         return instance.get(`auth/me`)
             .then(response => response.data)
+    },
+    login(email, password, rememberMe = false) {
+        return instance.post(`auth/login`, {email, password, rememberMe})
+            .then(res => res.data)
+    },
+    logOut() {
+        return instance.delete(`auth/login`)
+            .then(res => res.data)
     }
 }
 

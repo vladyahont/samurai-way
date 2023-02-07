@@ -10,7 +10,6 @@ import {
 } from "../../redux/users-reducer";
 import React, {ComponentType} from "react";
 import {Users} from "./Users";
-
 import PreLoader from "../preLoader/preLoader";
 import withAuthRedirect from "../HOK/withAuthRedirect";
 import {compose} from "redux";
@@ -118,7 +117,6 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-//const AuthRedirectComponent = withAuthRedirect()
 
 export const UserContainer = compose<ComponentType>(
     connect(mapStateToProps, {
