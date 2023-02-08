@@ -1,5 +1,6 @@
 import {authAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {stopSubmit} from "redux-form";
 
 const initialState: InitialStateType = {
     id: 0,
@@ -56,6 +57,9 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(getAuthUserData())
+                } else {
+                    const errMess = data.messages.length > 0 ? data.messages[0] : 'Some error'
+                    dispatch(stopSubmit('login', {email: errMess}))
                 }
             })
     }

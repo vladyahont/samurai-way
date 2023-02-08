@@ -11,6 +11,7 @@ type MapStateToPropsType = {
     profile: ProfileType
     isAuth: boolean
     status: string
+    authorizedUserId: number
 }
 type MapDispatchToPropsType = {
     setUserProfile: (profile: ProfileType) => void
@@ -48,7 +49,9 @@ class ProfileContainer extends React.Component <ProfilePropsType> {
 
 let mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.id,
+    isAuth: state.auth.id
 })
 
 
