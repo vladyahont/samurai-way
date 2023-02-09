@@ -1,5 +1,4 @@
 import {authAPI} from "../api/api";
-import {Dispatch} from "redux";
 import {stopSubmit} from "redux-form";
 
 const initialState: InitialStateType = {
@@ -41,15 +40,13 @@ export const setAuthUserData = (id: number | null, email: string | null, login: 
     } as const
 }
 
-export const getAuthUserData = () => {
-    return (dispatch: any) => {
-        authAPI.getAuthMe().then(data => {
-            if (data.resultCode === 0) {
-                const {id, email, login} = data.data.login
-                dispatch(setAuthUserData(id, email, login, true))
-            }
-        })
-    }
+export const getAuthUserData = () => (dispatch: any) => {
+    return authAPI.getAuthMe().then(data => {
+        if (data.resultCode === 0) {
+            const {id, email, login} = data.data.login
+            dispatch(setAuthUserData(id, email, login, true))
+        }
+    })
 }
 export const loginTC = (email: string, password: string, rememberMe: boolean) => {
     return (dispatch: any) => {
