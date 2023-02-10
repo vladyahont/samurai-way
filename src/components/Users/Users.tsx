@@ -26,7 +26,7 @@ export const Users = (props: UsersPropsType & { onPageChanged: any }) => {
                 }
             </div>
             {
-                props.usersPage.map(u => <div key={u.id}>
+                props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
                         <NavLink to={'/profile/' + u.id}>
