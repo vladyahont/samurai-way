@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
-// @ts-ignore
-import {Route, Routes, withRouter} from "react-router-dom";
+import {Route, Routes, useParams} from "react-router-dom";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UserContainer} from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -33,8 +32,8 @@ class App extends React.Component <AppPropsType> {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Routes>
-                        <Route path='/dialogs/*' element={<DialogsContainer/>}/>
-                        <Route path='/profile/*' element={<ProfileContainer/>}/>
+                        <Route path='/profile' element={<ProfileContainer/>}/>
+                        <Route path='/dialogs' element={<DialogsContainer/>}/>
                         <Route path='/users' element={<UserContainer/>}/>
                         <Route path='/login' element={<LoginPage/>}/>
                     </Routes>
@@ -51,6 +50,15 @@ type MapStateToPropsType = {
     initialized: boolean
 }
 const mapStateToProps = (state: AppStateType) => {
-    initialized: state.app.initialized;
+    return {initialized: state.app.initialized}
 }
+
+function withRouter(Component: any) {
+    function ComponentWithParams(props: Omit<AppPropsType, 'params'>) {
+        return <Component {...props} params={useParams()}/>
+    }
+
+    return ComponentWithParams
+}
+
 export default compose<React.FC>(withRouter, connect(mapStateToProps, {initialize}))(App)

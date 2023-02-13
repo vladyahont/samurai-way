@@ -80,6 +80,7 @@ export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class UsersContainer extends React.Component <UsersPropsType> {
 
+
     componentDidMount() {
         this.props.requestUsers(this.props.currentPage, this.props.pageSize)
     }

@@ -6,6 +6,7 @@ import {NavLink} from "react-router-dom";
 
 export const Users = (props: UsersPropsType & { onPageChanged: any }) => {
 
+
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     console.log(pagesCount)
     let pages = []

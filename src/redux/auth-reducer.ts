@@ -34,6 +34,8 @@ export const authReducer = (state = initialState, action: ActionsTypes): Initial
 
 
 export const setAuthUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean): setAuthUserDataType => {
+    console.log(isAuth)
+
     return {
         type: 'SET-USER-DATA',
         payload: {id, email, login, isAuth}
@@ -42,6 +44,7 @@ export const setAuthUserData = (id: number | null, email: string | null, login: 
 
 export const getAuthUserData = () => (dispatch: any) => {
     return authAPI.getAuthMe().then(data => {
+        console.log('alalalal')
         if (data.resultCode === 0) {
             const {id, email, login} = data.data.login
             dispatch(setAuthUserData(id, email, login, true))
@@ -52,7 +55,9 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
     return (dispatch: any) => {
         authAPI.login(email, password, rememberMe)
             .then(data => {
+
                 if (data.resultCode === 0) {
+                    console.log('sdcsdsd')
                     dispatch(getAuthUserData())
                 } else {
                     const errMess = data.messages.length > 0 ? data.messages[0] : 'Some error'

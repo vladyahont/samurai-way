@@ -10,10 +10,11 @@ type FormDataType = {
     rememberMe: boolean
 }
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+
     return (
-        <form>
-            <div onSubmit={props.handleSubmit}>
-                <Field placeholder={'Email'} name={'Email'} component={'input'}/>
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field placeholder={'Email'} name={'email'} component={'input'}/>
             </div>
             <div>
                 <Field placeholder={'Password'} name={'password'} component={'input'}/>
@@ -22,7 +23,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <Field type={'checkbox'} name={'rememberMe'} component={'input'}/> remember me
             </div>
             <div>
-                
+
             </div>
             <div>
                 <button>Login</button>
@@ -41,7 +42,6 @@ type MapStatePropsType = {
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 const LoginPage = (props: MapStatePropsType) => {
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
         props.loginTC(formData.email, formData.password, formData.rememberMe)
     }
     if (props.isAuth) {
