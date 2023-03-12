@@ -1,4 +1,3 @@
-import {ActionsTypes} from "./store";
 
 export type MessagesType = {
     id: number
@@ -38,7 +37,7 @@ let initialState = {
 }
 
 export type InitialStateType = typeof initialState
-
+type ActionsTypes = SendMessageType
 
 export const messagesReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
 
@@ -64,3 +63,5 @@ export const sendMessageActionCreator = (newMessageText: string) => {
         newMessageText
     } as const
 }
+
+type SendMessageType = ReturnType<typeof sendMessageActionCreator>

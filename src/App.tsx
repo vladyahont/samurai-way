@@ -11,7 +11,7 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {initialize} from "./redux/app-reducer";
 import {AppStateType} from "./redux/redux-store";
-import PreLoader from "./components/preLoader/preLoader";
+import PreLoader from "./components/commons/preLoader/preLoader";
 
 type AppPropsType = MapStateToPropsType & MapDispatchToPropsType
 

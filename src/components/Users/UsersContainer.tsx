@@ -10,7 +10,7 @@ import {
 } from "../../redux/users-reducer";
 import React, {ComponentType} from "react";
 import {Users} from "./Users";
-import PreLoader from "../preLoader/preLoader";
+import PreLoader from "../commons/preLoader/preLoader";
 import withAuthRedirect from "../HOK/withAuthRedirect";
 import {compose} from "redux";
 import {

@@ -1,7 +1,7 @@
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
-const initialState: InitialStateType = {
+const initialState = {
     id: 0,
     email: 'null',
     login: 'Vlad',
@@ -12,17 +12,14 @@ export type InitialStateType = {
     id: number | null
     email: string | null
     login: string | null
-    isAuth: boolean
+    isAuth: boolean | null
 }
 
-type setAuthUserDataType = {
-    type: 'SET-USER-DATA',
-    payload: InitialStateType
-}
+type SetAuthUserDataType = ReturnType<typeof setAuthUserData>
 
-type ActionsTypes = setAuthUserDataType
+type ActionsTypes = SetAuthUserDataType
 
-export const authReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+export const authReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case "SET-USER-DATA": {
             return {...state, ...action.payload}
@@ -31,49 +28,36 @@ export const authReducer = (state = initialState, action: ActionsTypes): Initial
             return state
     }
 }
-
-
-export const setAuthUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean): setAuthUserDataType => {
-    console.log(isAuth)
-
+export const setAuthUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean | null) => {
     return {
         type: 'SET-USER-DATA',
         payload: {id, email, login, isAuth}
     } as const
 }
 
-export const getAuthUserData = () => (dispatch: any) => {
-    return authAPI.getAuthMe().then(data => {
-        console.log('alalalal')
-        if (data.resultCode === 0) {
-            const {id, email, login} = data.data.login
-            dispatch(setAuthUserData(id, email, login, true))
-        }
-    })
-}
-export const loginTC = (email: string, password: string, rememberMe: boolean) => {
-    return (dispatch: any) => {
-        authAPI.login(email, password, rememberMe)
-            .then(data => {
-
-                if (data.resultCode === 0) {
-                    console.log('sdcsdsd')
-                    dispatch(getAuthUserData())
-                } else {
-                    const errMess = data.messages.length > 0 ? data.messages[0] : 'Some error'
-                    dispatch(stopSubmit('login', {email: errMess}))
-                }
-            })
+export const getAuthUserData = () => async (dispatch: any) => {
+    const data = await authAPI.getAuthMe()
+    if (data.resultCode === 0) {
+        const {id, email, login} = data.data.login
+        dispatch(setAuthUserData(id, email, login, true))
     }
 }
-export const logOutTC = () => {
-    return (dispatch: any) => {
-        authAPI.logOut()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(setAuthUserData(null, null, null, false))
-                }
-            })
+export const loginTC = (email: string, password: string, rememberMe: boolean) => {
+    return async (dispatch: any) => {
+        const data = await authAPI.login(email, password, rememberMe)
+        if (data.resultCode === 0) {
+            console.log('sdcsdsd')
+            dispatch(getAuthUserData())
+        } else {
+            const errMess = data.messages.length > 0 ? data.messages[0] : 'Some error'
+            dispatch(stopSubmit('login', {email: errMess}))
+        }
+    }
+}
+export const logOutTC = () => async (dispatch: any) => {
+    const data = await authAPI.logOut()
+    if (data.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false))
     }
 }
 

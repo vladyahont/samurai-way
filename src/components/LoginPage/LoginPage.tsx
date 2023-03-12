@@ -34,7 +34,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
 
 type MapStatePropsType = {
-    isAuth: boolean
+    isAuth: boolean | null
     loginTC: (email: string, password: string, rememberMe: boolean) => void
 
 }

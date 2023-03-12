@@ -9,10 +9,7 @@ export type InitialStateType = {
     initialized: boolean
 }
 
-type SetInitializedType = {
-    type: 'SET-INITIALIZED'
-}
-
+type SetInitializedType = ReturnType<typeof setInitialized>
 type ActionsTypes = SetInitializedType
 
 export const appReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
@@ -26,7 +23,7 @@ export const appReducer = (state = initialState, action: ActionsTypes): InitialS
 }
 
 
-export const setInitialized = (): SetInitializedType => {
+export const setInitialized = () => {
     return {
         type: 'SET-INITIALIZED'
     } as const

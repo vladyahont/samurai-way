@@ -1,10 +1,10 @@
-import React, {Component, ComponentType, FC, ReactNode} from 'react';
+import React, {Component, ComponentType, FC} from 'react';
 import {Navigate} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
 
 type mapStateToPropsForRedirectType = {
-    isAuth: boolean
+    isAuth: boolean | null
 }
 const mapStateToPropsForRedirect = (state: AppStateType): mapStateToPropsForRedirectType => {
     return {
@@ -23,6 +23,6 @@ export function WithAuthRedirect<T extends JSX.IntrinsicAttributes>(Component: C
         return <Component {...restProps as T} />
     }
     return connect(mapStateToPropsForRedirect)(RedirectComponent)
-};
+}
 
 export default WithAuthRedirect;
