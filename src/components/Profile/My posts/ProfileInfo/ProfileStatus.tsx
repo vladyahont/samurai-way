@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 
 export type ProfileStatusType = {
     status: string
@@ -6,17 +6,25 @@ export type ProfileStatusType = {
 }
 const ProfileStatus = (props: ProfileStatusType) => {
 
-    //const [status, setStatus] = useState<string>(props.status)
+    const [status, setStatus] = useState<string>(props.status)
     const [editMode, setEditMode] = useState<boolean>(false)
 
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
+
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
-        props.updateStatus(e.currentTarget.value)
-        //setStatus(e.currentTarget.value)
+        setStatus(e.currentTarget.value)
+
     }
 
-    return editMode ? <input value={props.status} autoFocus
+
+    return editMode ? <input value={status} autoFocus
                              onChange={onStatusChange}
-                             onBlur={() => setEditMode(false)}/>
+                             onBlur={() => {
+                                 props.updateStatus(status)
+                                 setEditMode(false)
+                             }}/>
         : <span onDoubleClick={() => setEditMode(true)}>{props.status}</span>
 
 
