@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/redux-store";
+import {AppStateType} from "redux/redux-store";
 import {
     follow,
     followSuccess, requestUsers,
@@ -7,7 +7,7 @@ import {
     toggleFollowingInProgress, unFollow,
     unFollowSuccess,
     UserType
-} from "../../redux/users-reducer";
+} from "redux/users-reducer";
 import React, {ComponentType} from "react";
 import {Users} from "./Users";
 import PreLoader from "../commons/preLoader/preLoader";
@@ -20,42 +20,7 @@ import {
     getPageSize,
     getTotalUsersCount,
     getUsersSuperSel
-} from "../../redux/users-selectors";
-
-// const users = [
-//     {
-//         id: 1,
-//         photoUrl: '',
-//         followed: true,
-//         fullName: 'Vladislav',
-//         status: 'I am a bocman',
-//         location: {country: 'Belarus', city: 'Minsk'}
-//     },
-//     {
-//         id: 2,
-//         photoUrl: '',
-//         followed: true,
-//         fullName: 'Tatiana',
-//         status: 'I am a bocmanka',
-//         location: {country: 'Russia', city: 'Moscow'}
-//     },
-//     {
-//         id: 3,
-//         photoUrl: '',
-//         followed: false,
-//         fullName: 'Victor',
-//         status: 'I am a bocman too',
-//         location: {country: 'Ukraine', city: 'Kiev'}
-//     },
-//     {
-//         id: 4,
-//         photoUrl: '',
-//         followed: true,
-//         fullName: 'Chong',
-//         status: 'I am a bocman too too too',
-//         location: {country: 'Poland', city: 'Warsaw'}
-//     }
-// ]
+} from "redux/users-selectors";
 
 type MapStateToPropsType = {
     users: Array<UserType>

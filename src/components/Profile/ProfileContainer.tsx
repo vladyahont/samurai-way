@@ -1,8 +1,8 @@
 import React, {Component, ComponentType} from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/redux-store";
-import {getUserProfile, getUserStatus, ProfileType, updateStatus} from "../../redux/profile-reducer";
+import {AppStateType} from "redux/redux-store";
+import {getUserProfile, getUserStatus, ProfileType, updateStatus} from "redux/profile-reducer";
 import {useParams, Params} from "react-router-dom";
 import {compose} from "redux";
 

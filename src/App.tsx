@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
-import {Navbar} from "./components/Navbar/Navbar";
+import {Navbar} from "components/Navbar/Navbar";
 import {Route, Routes, useParams} from "react-router-dom";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {UserContainer} from "./components/Users/UsersContainer";
+import {DialogsContainer} from "components/Dialogs/DialogsContainer";
+import {UserContainer} from "components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/LoginPage/LoginPage";
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {initialize} from "./redux/app-reducer";
-import {AppStateType} from "./redux/redux-store";
+import {initialize} from "redux/app-reducer";
+import {AppStateType} from "redux/redux-store";
 import PreLoader from "./components/commons/preLoader/preLoader";
 
 type AppPropsType = MapStateToPropsType & MapDispatchToPropsType

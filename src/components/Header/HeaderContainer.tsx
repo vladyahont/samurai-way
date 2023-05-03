@@ -1,8 +1,8 @@
 import React from 'react';
 import {Header} from "./Header";
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/redux-store";
-import {logOutTC} from "../../redux/auth-reducer";
+import {AppStateType} from "redux/redux-store";
+import {logOutTC} from "redux/auth-reducer";
 import {compose} from "redux";
 
 type MapStateToPropsType = {

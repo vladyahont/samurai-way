@@ -1,10 +1,10 @@
 import React from 'react';
 import {
     addPostAC
-} from "../../../redux/profile-reducer";
+} from "redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
-import {AppStateType} from "../../../redux/redux-store";
+import {AppStateType} from "redux/redux-store";
 import {compose} from "redux";
 
 const mapStateToProps = (state: AppStateType) => {

@@ -1,5 +1,5 @@
-import {usersAPI} from "../api/api";
-import {updateObjectInArray} from "../components/objects-helpers";
+import {usersAPI} from "api/api";
+import {updateObjectInArray} from "components/objects-helpers";
 
 export type UserType = {
     name: string

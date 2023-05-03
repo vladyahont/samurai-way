@@ -1,10 +1,10 @@
 import React, {ComponentType} from 'react';
 import {
     sendMessageActionCreator
-} from '../../redux/message-reducer';
+} from 'redux/message-reducer';
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/redux-store";
+import {AppStateType} from "redux/redux-store";
 import withAuthRedirect from "../HOK/withAuthRedirect";
 import {compose} from "redux";
 

@@ -1,4 +1,4 @@
-import {profileAPI, usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "api/api";
 
 type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof setStatusAC>
